@@ -2,9 +2,6 @@
 
 #include "FS.h"
 #include "SD.h"
-//#include "SDAccess.h"
-
-
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -14,16 +11,7 @@
 const String VERSION = "1.08";
 const int BRIGHTNESS = 10;
 
-/*
- * Anzeige nach Moduswechsel wieder recreaten
- * Leere Zeilen in lock.csv aufiltern
- * Versionsanzeige
- * Was ist mit der LED?
- * 
- */
-
 String sTokenName = "";
-
 
 struct rfid{
    String Name;
@@ -141,8 +129,6 @@ void setup() {
   #ifdef DEBUGLOGGING
     Serial.println("geht los");
   #endif
-  
-  //setColor_blue();
 
   //getLastLineFromFile(SD, LOGFILE);
   recallState();
@@ -190,29 +176,6 @@ void loop() {
     bPrintNewState = true;
   }
   
-/*
-  if(iOP_Mode == OP_MODE_NORMAL){
-    operationNormal();
-  }else if(iOP_Mode == OP_MODE_LISTTOKENS){
-    operationListTokens();
-  }else if(iOP_Mode == OP_MODE_STORETOKENS){
-    operationStoreTokens();
-  }else if(iOP_Mode == OP_MODE_TEST){
-    //displayShowText("Memory:", String( availableMemory() ) + "xxx", "");
-    displayShowText("Version:", VERSION, "");
-    //iOP_Mode = OP_MODE_NORMAL;
-    
-    //delay( 1000 );
-    //displayShowModus(iOP_Mode);
-    //recallState();
-    //bNewMode = true;
-  }else{}
-
-  if(bNewMode==true){
-    setColor(rgbCol.Red, rgbCol.Green, rgbCol.Blue);
-    bNewMode = false;
-  }
-*/  
 }
 
 bool initSD(){
@@ -788,19 +751,6 @@ void setColor(int pRed, int pGreen, int pBlue){
   //bNewMode = false;
 }
 
-/*
-void setColor_red(){
-  setColor(255, 0, 0);
-}
-
-void setColor_green(){
-  setColor(0, 255, 0);
-}
-
-void setColor_blue(){
-  setColor(0, 0, 255);
-}
-*/
 void queryButton(){
   //----Setting the OperationMode
    if(digitalRead(BUTTON)==true){ 
